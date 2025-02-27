@@ -19,6 +19,9 @@ export default function Home() {
           <SpreadSheet rows={10} columns={10} />
         </Grid>
       </Grid>
+      <h1>Start adding drag</h1>
     </SpreadsheetProvider>
   );
 }
+
+// statrt adding drag feature
