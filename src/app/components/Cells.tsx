@@ -1,17 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSpreadsheet } from "../context/SpreadSheetContext";
 import styles from "../styles/cells.module.css";
 
 const Cell = ({ id }) => {
-  const { cellValues, updateCellValue, showSelectionState } = useSpreadsheet();
+  const {
+    cellValues,
+    updateCellValue,
+    showSelectionState,
+    addCellSelection,
+    isCellSelected,
+  } = useSpreadsheet();
   const [isEditing, setIsEditing] = useState(false);
   const [background, setBackground] = useState("white");
 
   const value = cellValues[id] || "";
-
   const handleBlur = () => setIsEditing(false);
   const handleChange = (e) => updateCellValue(id, e.target.value);
+  useEffect(() => {
+    setBackground(isCellSelected(id) ? "#E6EFFD" : "white");
+  }, [isCellSelected(id)]);
 
   return (
     <div
@@ -25,6 +33,7 @@ const Cell = ({ id }) => {
       onMouseMove={() => {
         if (showSelectionState()) {
           setBackground("#E6EFFD");
+          addCellSelection(id);
         }
       }}
       onDoubleClick={() => {

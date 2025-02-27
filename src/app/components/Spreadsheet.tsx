@@ -4,7 +4,7 @@ import Cell from "./Cells";
 import { useSpreadsheet } from "../context/SpreadSheetContext";
 
 const SpreadSheet = ({ rows = 5, columns = 5 }) => {
-  const { setIsSelectionStarted } = useSpreadsheet();
+  const { setIsSelectionStarted, clearSelectedCells } = useSpreadsheet();
 
   return (
     <div
@@ -14,6 +14,7 @@ const SpreadSheet = ({ rows = 5, columns = 5 }) => {
       }}
       onMouseDown={() => {
         setIsSelectionStarted(true);
+        clearSelectedCells();
       }}
       onMouseUp={() => {
         setIsSelectionStarted(false);

@@ -28,15 +28,20 @@ export const SpreadsheetProvider = ({ children }) => {
         return isSelectionStarted;
     }
 
+    const isCellSelected = (id) => selectedCells.includes(id);
 
-    const toggleCellSelection = (cellId) => {
-        setSelectedCells((prev) => {
-            if (prev.includes(cellId)) {
-                return prev.filter((id) => id !== cellId); // Deselect
-            } else {
-                return [...prev, cellId]; // Select
-            }
-        });
+
+
+
+
+
+
+
+
+
+
+    const addCellSelection = (cellId) => {
+        setSelectedCells((prev) => (prev.includes(cellId) ? prev : [...prev, cellId]));
     };
 
     const clearSelectedCells = () => {
@@ -48,11 +53,12 @@ export const SpreadsheetProvider = ({ children }) => {
         cellValues,
         selectedCells,
         updateCellValue,
-        toggleCellSelection,
+        addCellSelection,
         clearSelectedCells,
         showCellValue,
         showSelectionState,
-        setIsSelectionStarted
+        setIsSelectionStarted,
+        isCellSelected
     };
 
     return (

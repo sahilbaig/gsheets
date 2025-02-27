@@ -3,7 +3,15 @@ import { Button } from "@mui/material";
 import { useSpreadsheet } from "../context/SpreadSheetContext";
 
 export default function ShowValuesButton() {
-  const { showCellValue } = useSpreadsheet();
+  const { showCellValue, selectedCells } = useSpreadsheet();
 
-  return <Button onClick={showCellValue}>Check value</Button>;
+  return (
+    <Button
+      onClick={() => {
+        console.log(selectedCells);
+      }}
+    >
+      Check value
+    </Button>
+  );
 }
