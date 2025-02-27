@@ -1,3 +1,4 @@
+// components/Spreadsheet.tsx
 "use client";
 import React from "react";
 import Cell from "./Cells";
@@ -11,7 +12,7 @@ const SpreadSheet = ({ rows = 5, columns = 5 }) => {
       }}
     >
       {Array.from({ length: rows * columns }).map((_, index) => (
-        <Cell key={index} />
+        <Cell key={index} id={index} />
       ))}
     </div>
   );
