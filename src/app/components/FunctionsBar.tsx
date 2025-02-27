@@ -2,29 +2,35 @@
 import React, { useState } from "react";
 import { Menu, MenuItem, IconButton } from "@mui/material";
 import FunctionsIcon from "@mui/icons-material/Functions";
-import useOperations from "../utils/functions";
+import { useSum, useMax, useMin, useCount } from "../utils/functions";
+
 const FunctionsBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
+  // Call hooks inside the component
+  const sum = useSum();
+  const max = useMax();
+  const min = useMin();
+  const count = useCount();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const { sum, count, min, max } = useOperations();
 
-  const handleClose = (operation: string) => {
+  const handleClose = (operation) => {
     switch (operation) {
       case "sum":
-        console.log(sum);
+        console.log("SUM result:", sum);
         break;
       case "max":
-        console.log(max);
+        console.log("MAX result:", max);
         break;
       case "min":
-        console.log(min);
+        console.log("MIN result:", min);
         break;
       case "count":
-        console.log(count);
+        console.log("COUNT result:", count);
         break;
       default:
         console.log("Invalid operation");

@@ -1,23 +1,39 @@
 import { useSpreadsheet } from "../context/SpreadSheetContext";
 
-const sum = (values) => values.reduce((acc, val) => acc + Number(val), 0);
-const max = (values) => Math.max(...values.map(Number));
-const min = (values) => Math.min(...values.map(Number));
-const count = (values) => values.length;
-
-const useOperations = () => {
-  const { cellValues } = useSpreadsheet();
-
-  const values = Object.values(cellValues).filter(
-    (val) => !isNaN(val) && val !== ""
-  );
-
-  return {
-    sum: sum(values),
-    max: max(values),
-    min: min(values),
-    count: count(values),
-  };
+export const useSum = () => {
+  const { cellValues, selectedCells } = useSpreadsheet();
+  return selectedCells
+    .map((cell) => Number(cellValues[cell]))
+    .filter((val) => !isNaN(val))
+    .reduce((acc, val) => acc + val, 0);
 };
 
-export default useOperations;
+export const useMin = () => {
+  const { cellValues, selectedCells } = useSpreadsheet();
+
+  if (!selectedCells.length) return null;
+
+  let minValue = Infinity;
+  for (const cell of selectedCells) {
+    const value = Number(cellValues[cell]);
+    if (!isNaN(value)) {
+      minValue = Math.min(minValue, value);
+    }
+  }
+
+  return minValue === Infinity ? null : minValue;
+};
+
+export const useMax = () => {
+  const { cellValues, selectedCells } = useSpreadsheet();
+  const values = selectedCells
+    .map((cell) => Number(cellValues[cell]))
+    .filter((val) => !isNaN(val));
+
+  return values.length ? Math.max(...values) : null;
+};
+
+export const useCount = () => {
+  const { selectedCells } = useSpreadsheet();
+  return selectedCells.length;
+};
