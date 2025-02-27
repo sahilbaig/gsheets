@@ -4,6 +4,9 @@ import { useSpreadsheet } from "../context/SpreadSheetContext";
 import styles from "../styles/cells.module.css";
 
 const Cell = ({ id }) => {
+  const intialBorder = "1px solid #F5F5F5";
+  const dragBorder = "3px dashed #5C98E6";
+  //   const dragBorder = "1px sol"
   const {
     cellValues,
     updateCellValue,
@@ -15,6 +18,7 @@ const Cell = ({ id }) => {
   } = useSpreadsheet();
   const [isEditing, setIsEditing] = useState(false);
   const [background, setBackground] = useState("white");
+  const [borderStyle, setBorderStyle] = useState(intialBorder);
   const cellRef = useRef(null);
 
   const value = cellValues[id] || "";
@@ -45,12 +49,12 @@ const Cell = ({ id }) => {
       className={styles.cell}
       style={{
         height: "40px",
-        border: "1px solid #F5F5F5",
+        border: borderStyle,
         backgroundColor: background,
         padding: "4px",
       }}
       onMouseMove={(e) => {
-        if (showSelectionState()) {
+        if (showSelectionState() && !dragState) {
           setBackground("#E6EFFD");
           addCellSelection(id);
         }
@@ -59,21 +63,24 @@ const Cell = ({ id }) => {
       onMouseDown={(e) => {
         if (isOnBoundary(e)) {
           setDragState(id);
-        } else {
-          console.log(`Clicked inside cell: ${id}`);
         }
       }}
       onMouseUp={() => {
-        const dragStartValue = cellValues[dragState];
-        updateCellValue(id, dragStartValue);
-        updateCellValue(dragState, "");
-        setDragState(null);
+        if (dragState) {
+          const dragStartValue = cellValues[dragState];
+          updateCellValue(dragState, "");
+          updateCellValue(id, dragStartValue);
+
+          setDragState(null);
+        }
       }}
       onMouseEnter={() => {
         if (dragState) {
-          console.log(dragState);
-          console.log(cellValues[dragState]);
+          setBorderStyle(dragBorder);
         }
+      }}
+      onMouseLeave={() => {
+        setBorderStyle(intialBorder);
       }}
     >
       {isEditing ? (
