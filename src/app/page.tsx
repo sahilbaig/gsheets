@@ -24,5 +24,3 @@ export default function Home() {
     </SpreadsheetProvider>
   );
 }
-
-// statrt adding drag feature

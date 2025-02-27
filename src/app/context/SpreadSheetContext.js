@@ -9,6 +9,7 @@ export const SpreadsheetProvider = ({ children }) => {
     // State to manage cell values
     const [cellValues, setCellValues] = useState({});
     const [isSelectionStarted, setIsSelectionStarted] = useState(false);
+    const [dragState, setDragState] = useState(null)
 
     // State to manage selected cells
     const [selectedCells, setSelectedCells] = useState([]);
@@ -30,16 +31,6 @@ export const SpreadsheetProvider = ({ children }) => {
 
     const isCellSelected = (id) => selectedCells.includes(id);
 
-
-
-
-
-
-
-
-
-
-
     const addCellSelection = (cellId) => {
         setSelectedCells((prev) => (prev.includes(cellId) ? prev : [...prev, cellId]));
     };
@@ -58,7 +49,9 @@ export const SpreadsheetProvider = ({ children }) => {
         showCellValue,
         showSelectionState,
         setIsSelectionStarted,
-        isCellSelected
+        isCellSelected,
+        setDragState,
+        dragState
     };
 
     return (
