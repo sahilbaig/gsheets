@@ -15,6 +15,21 @@ const TopBar = () => {
           <MenuBar></MenuBar>
         </Stack>
       </Grid2>
+      <Grid2>
+        <ClickableIcon></ClickableIcon>
+      </Grid2>
+      <Grid2>
+        <ClickableIcon></ClickableIcon>
+      </Grid2>
+      <Grid2>
+        <ClickableIcon></ClickableIcon>
+      </Grid2>
+      <Grid2>
+        <ClickableIcon></ClickableIcon>
+      </Grid2>
+      <Grid2>
+        <ClickableIcon></ClickableIcon>
+      </Grid2>
     </Grid2>
   );
 };
