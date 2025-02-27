@@ -1,9 +1,10 @@
-// app/page.js
+"use client";
 import { SpreadsheetProvider } from "./context/SpreadSheetContext";
 import Grid from "@mui/material/Grid";
 import TopBar from "./components/Topbar.tsx";
 import PrimaryToolBar from "./components/PrimaryToolBar.tsx";
 import SpreadSheet from "./components/Spreadsheet.tsx";
+import ShowValuesButton from "./components/showValues";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
           <SpreadSheet rows={10} columns={10} />
         </Grid>
       </Grid>
-      <h1>Start adding drag</h1>
+      <ShowValuesButton />
     </SpreadsheetProvider>
   );
 }

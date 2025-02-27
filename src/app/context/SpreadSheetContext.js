@@ -8,6 +8,7 @@ const SpreadsheetContext = createContext();
 export const SpreadsheetProvider = ({ children }) => {
     // State to manage cell values
     const [cellValues, setCellValues] = useState({});
+    const [isSelectionStarted, setIsSelectionStarted] = useState(false);
 
     // State to manage selected cells
     const [selectedCells, setSelectedCells] = useState([]);
@@ -20,7 +21,14 @@ export const SpreadsheetProvider = ({ children }) => {
         }));
     };
 
-    // Function to select/deselect a cell
+    const showCellValue = () => {
+        console.log(cellValues)
+    }
+    const showSelectionState = () => {
+        return isSelectionStarted;
+    }
+
+
     const toggleCellSelection = (cellId) => {
         setSelectedCells((prev) => {
             if (prev.includes(cellId)) {
@@ -31,7 +39,6 @@ export const SpreadsheetProvider = ({ children }) => {
         });
     };
 
-    // Function to clear all selected cells
     const clearSelectedCells = () => {
         setSelectedCells([]);
     };
@@ -43,6 +50,9 @@ export const SpreadsheetProvider = ({ children }) => {
         updateCellValue,
         toggleCellSelection,
         clearSelectedCells,
+        showCellValue,
+        showSelectionState,
+        setIsSelectionStarted
     };
 
     return (
@@ -52,5 +62,4 @@ export const SpreadsheetProvider = ({ children }) => {
     );
 };
 
-// Custom hook to use the context
 export const useSpreadsheet = () => useContext(SpreadsheetContext);
