@@ -16,7 +16,6 @@ const SpreadSheet = ({ rows = 5, columns = 5 }) => {
         setIsSelectionStarted(true);
       }}
       onMouseUp={() => {
-        console.log("mouse up event ");
         setIsSelectionStarted(false);
       }}
     >

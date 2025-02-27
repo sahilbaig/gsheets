@@ -27,6 +27,9 @@ const Cell = ({ id }) => {
           setBackground("#E6EFFD");
         }
       }}
+      onDoubleClick={() => {
+        setIsEditing(true);
+      }}
     >
       {isEditing ? (
         <input
