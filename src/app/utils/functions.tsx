@@ -37,3 +37,14 @@ export const useCount = () => {
   const { selectedCells } = useSpreadsheet();
   return selectedCells.length;
 };
+export const useAverage = () => {
+  const { cellValues, selectedCells } = useSpreadsheet();
+
+  const values = selectedCells
+    .map((cell) => Number(cellValues[cell]))
+    .filter((val) => !isNaN(val)); // Only count valid numbers
+
+  return values.length
+    ? values.reduce((acc, val) => acc + val, 0) / values.length
+    : null;
+};
