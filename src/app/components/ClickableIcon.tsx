@@ -10,7 +10,7 @@ function ClickableIcon() {
   };
 
   return (
-    <IconButton onClick={handleClick} aria-label="favorite" color="primary">
+    <IconButton onClick={handleClick} aria-label="favorite" color="success">
       <Description />
     </IconButton>
   );

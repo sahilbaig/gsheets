@@ -6,7 +6,7 @@ import styles from "../styles/cells.module.css";
 const Cell = ({ id }) => {
   const intialBorder = "1px solid #F5F5F5";
   const dragBorder = "3px dashed #5C98E6";
-  //   const dragBorder = "1px sol"
+
   const {
     cellValues,
     updateCellValue,
@@ -16,6 +16,7 @@ const Cell = ({ id }) => {
     setDragState,
     dragState,
   } = useSpreadsheet();
+
   const [isEditing, setIsEditing] = useState(false);
   const [background, setBackground] = useState("white");
   const [borderStyle, setBorderStyle] = useState(intialBorder);
@@ -98,7 +99,7 @@ const Cell = ({ id }) => {
           }}
         />
       ) : (
-        <div>{value}</div>
+        <div style={{ userSelect: "none" }}>{value}</div>
       )}
     </div>
   );

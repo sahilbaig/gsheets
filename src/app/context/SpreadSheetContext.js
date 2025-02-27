@@ -38,6 +38,24 @@ export const SpreadsheetProvider = ({ children }) => {
     const clearSelectedCells = () => {
         setSelectedCells([]);
     };
+    const getMinCellValue = () => {
+        if (selectedCells.length) {
+            let minValue = Infinity;
+
+            for (const cell of selectedCells) {
+                const value = Number(cellValues[cell]);
+
+                if (!isNaN(value)) {
+                    console.log(`Cell ${cell}:`, value); // Print the value
+                    minValue = Math.min(minValue, value);
+                }
+            }
+
+            return minValue === Infinity ? null : minValue;
+        }
+        return null;
+
+    };
 
     // Value to be provided by the context
     const value = {
@@ -51,7 +69,8 @@ export const SpreadsheetProvider = ({ children }) => {
         setIsSelectionStarted,
         isCellSelected,
         setDragState,
-        dragState
+        dragState,
+        getMinCellValue
     };
 
     return (
