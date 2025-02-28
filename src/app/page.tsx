@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid";
 import TopBar from "./components/Topbar.tsx";
 import PrimaryToolBar from "./components/PrimaryToolBar.tsx";
 import SpreadSheet from "./components/Spreadsheet.tsx";
-import ShowValuesButton from "./components/showValues";
 import DataToolBar from "./components/DataToolBar";
 
 export default function Home() {
@@ -24,7 +23,6 @@ export default function Home() {
           <SpreadSheet />
         </Grid>
       </Grid>
-      <ShowValuesButton />
     </SpreadsheetProvider>
   );
 }

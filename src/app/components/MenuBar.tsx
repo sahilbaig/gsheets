@@ -1,14 +1,33 @@
-import { Grid2 } from "@mui/material";
+"use client";
+import { Grid, Tooltip } from "@mui/material";
+import { useState } from "react";
 
 const MenuBar = () => {
+  const menuItems = ["File", "Edit", "View", "Insert", "Format"];
+  const [hovered, setHovered] = useState(null);
+
   return (
-    <Grid2 container spacing={1}>
-      <Grid2>File</Grid2>
-      <Grid2>Edit</Grid2>
-      <Grid2>View</Grid2>
-      <Grid2>Insert</Grid2>
-      <Grid2>Format</Grid2>
-    </Grid2>
+    <Grid container spacing={1}>
+      {menuItems.map((item, index) => (
+        <Grid
+          item
+          key={item}
+          onMouseEnter={() => setHovered(index)}
+          onMouseLeave={() => setHovered(null)}
+          sx={{
+            padding: "8px",
+            cursor: "pointer",
+            backgroundColor: hovered === index ? "#E8EBEE" : "transparent",
+            transition: "background-color 0.3s",
+            borderRadius: "4px",
+          }}
+        >
+          <Tooltip title={`${item} Coming soon`} arrow>
+            <span>{item}</span>
+          </Tooltip>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 
