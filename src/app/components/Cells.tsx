@@ -6,6 +6,7 @@ import styles from "../styles/cells.module.css";
 const Cell = ({ id }) => {
   const intialBorder = "1px solid #F5F5F5";
   const dragBorder = "3px dashed #5C98E6";
+  const activeBorder = "1px solid blue";
 
   const {
     cellValues,
@@ -15,6 +16,8 @@ const Cell = ({ id }) => {
     isCellSelected,
     setDragState,
     dragState,
+    setActiveCell,
+    isCellActive,
   } = useSpreadsheet();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -30,11 +33,19 @@ const Cell = ({ id }) => {
     setBackground(isCellSelected(id) ? "#E6EFFD" : "white");
   }, [isCellSelected(id)]);
 
+  useEffect(() => {
+    if (isCellActive(id)) {
+      setBorderStyle(activeBorder);
+    } else {
+      setBorderStyle(intialBorder);
+    }
+  }, [isCellActive(id)]);
+
   const isOnBoundary = (e) => {
     if (!cellRef.current) return false;
 
     const rect = cellRef.current.getBoundingClientRect();
-    const margin = 5; // Define boundary margin
+    const margin = 5;
 
     return (
       e.clientX <= rect.left + margin ||
@@ -42,6 +53,11 @@ const Cell = ({ id }) => {
       e.clientY <= rect.top + margin ||
       e.clientY >= rect.bottom - margin
     );
+  };
+
+  const handleClick = () => {
+    setBorderStyle(activeBorder);
+    setActiveCell(id);
   };
 
   return (
@@ -52,7 +68,7 @@ const Cell = ({ id }) => {
         height: "40px",
         border: borderStyle,
         backgroundColor: background,
-        padding: "4px",
+        padding: "4px", // Apply margin dynamically
       }}
       onMouseMove={(e) => {
         if (showSelectionState() && !dragState) {
@@ -71,7 +87,6 @@ const Cell = ({ id }) => {
           const dragStartValue = cellValues[dragState];
           updateCellValue(dragState, "");
           updateCellValue(id, dragStartValue);
-
           setDragState(null);
         }
       }}
@@ -81,8 +96,11 @@ const Cell = ({ id }) => {
         }
       }}
       onMouseLeave={() => {
-        setBorderStyle(intialBorder);
+        if (!isCellActive(id)) {
+          setBorderStyle(intialBorder);
+        }
       }}
+      onClick={handleClick}
     >
       {isEditing ? (
         <input
