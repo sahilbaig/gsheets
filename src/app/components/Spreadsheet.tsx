@@ -54,6 +54,7 @@ const SpreadSheet = ({ rows = 20, columns = 13 }) => {
         gridTemplateColumns: `50px ${columnWidths
           .map((w) => `${w}px`)
           .join(" ")}`,
+        border: "1px solid #ccc",
       }}
       onMouseDown={() => {
         setIsSelectionStarted(true);
@@ -62,17 +63,18 @@ const SpreadSheet = ({ rows = 20, columns = 13 }) => {
       onMouseUp={() => setIsSelectionStarted(false)}
     >
       {/* Empty corner cell */}
-      <div></div>
+      <div style={{ border: "1px solid #ccc", background: "#f0f0f0" }}></div>
 
       {/* Column headers with resizers */}
       {columnLabels.map((label, index) => (
         <div
           key={label}
           style={{
-            fontWeight: "bold",
             textAlign: "center",
             position: "relative",
             width: columnWidths[index],
+            border: "1px solid #ccc",
+            background: "#FFFFFF",
           }}
         >
           {label}
@@ -103,6 +105,8 @@ const SpreadSheet = ({ rows = 20, columns = 13 }) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              border: "1px solid #ccc",
+              background: "#FFFFFF",
             }}
           >
             {row}
@@ -123,10 +127,9 @@ const SpreadSheet = ({ rows = 20, columns = 13 }) => {
             <Cell
               key={`${col}${row}`}
               id={`${col}${row}`}
-              style={{
-                width: columnWidths[colIndex],
-                height: rowHeights[rowIndex],
-              }}
+              width={columnWidths[colIndex]}
+              height={rowHeights[rowIndex]}
+              style={{ border: "1px solid #ccc" }}
             />
           ))}
         </React.Fragment>
