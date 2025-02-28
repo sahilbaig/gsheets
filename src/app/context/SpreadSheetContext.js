@@ -11,6 +11,7 @@ export const SpreadsheetProvider = ({ children }) => {
     const [isSelectionStarted, setIsSelectionStarted] = useState(false);
     const [dragState, setDragState] = useState(null)
     const [activeCell, setActiveCell] = useState("A1");
+    const [cellType, setCellType] = useState({})
 
     // State to manage selected cells
     const [selectedCells, setSelectedCells] = useState([]);
@@ -40,6 +41,10 @@ export const SpreadsheetProvider = ({ children }) => {
         setSelectedCells([]);
     };
 
+    const updateCellType = (id, type) => {
+        setCellType((prev) => ({ ...prev, [id]: type }));
+    };
+
     const isCellActive = (id) => {
         if (activeCell == id)
             return true
@@ -61,7 +66,9 @@ export const SpreadsheetProvider = ({ children }) => {
         dragState,
         setActiveCell,
         isCellActive,
-        activeCell
+        activeCell,
+        updateCellType,
+        cellType
     };
 
     return (

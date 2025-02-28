@@ -18,6 +18,7 @@ const Cell = ({ id, width, height }) => {
     dragState,
     setActiveCell,
     isCellActive,
+    cellType,
   } = useSpreadsheet();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -27,7 +28,9 @@ const Cell = ({ id, width, height }) => {
 
   const value = cellValues[id] || "";
   const handleBlur = () => setIsEditing(false);
-  const handleChange = (e) => updateCellValue(id, e.target.value);
+  const handleChange = (e) => {
+    updateCellValue(id, e.target.value);
+  };
 
   useEffect(() => {
     setBackground(isCellSelected(id) ? "#E6EFFD" : "white");
@@ -37,6 +40,11 @@ const Cell = ({ id, width, height }) => {
     setBorderStyle(isCellActive(id) ? activeBorder : intialBorder);
   }, [isCellActive(id)]);
 
+  useEffect(() => {
+    if (cellType[id]) {
+      console.log(`Cell ${id} type changed to: ${cellType[id]}`);
+    }
+  }, [cellType[id]]); //cell type
   const isOnBoundary = (e) => {
     if (!cellRef.current) return false;
 
