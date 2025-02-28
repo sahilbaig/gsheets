@@ -6,29 +6,52 @@ This project is a web-based spreadsheet application that mimics the core functio
 
 ### 1. Edit Cells
 
-- Double click on any cell to start editing.
+- Double click on any cell to start editing.  
   ![Double Click to Edit](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
 
 ### 2. Drag Cells
 
 - Drag cells around.
-  ![Double Click to Edit](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
+- This is implemented using ContextAPI to track `startCell`.  
+  ![Drag Cells](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
 
-### 3. Select a group of cells
+### 3. Select a Group of Cells
 
 - Drag mouse around to select a group of cells.
-- This is implemented using ContextAPI to track selected cells and MouseEvents to add or remove cells to list of Selected cells
-  ![Double Click to Edit](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
+- This is implemented using ContextAPI to track selected cells and MouseEvents to add or remove cells from the list of selected cells.  
+  ![Select Cells](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
 
-### 4. Get SUM , MAX , MIN , AVERAGE , COUNT
+### 4. Get SUM, MAX, MIN, AVERAGE, COUNT
 
 - Select a target cell.
 - Select the group of cells for which you want the value.
-- Type command in functions box. - for sum type : =sum - for count type : =count - for max type : =max - for min type : =min - for average type : =average
+- Type command in the functions box:
 
-  ![Double Click to Edit](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
+  - For sum type: `=sum`
+  - For count type: `=count`
+  - For max type: `=max`
+  - For min type: `=min`
+  - For average type: `=average`
 
-### 4. Mathematical functions retain their value
+  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
+
+### 5. Mathematical Functions Retain Their Value
+
+- Cells update their value when cells which were initially used to create them change their values.
+- This is implemented using ContextAPI to keep track of cell type.
+- `useState` is used to maintain cells dependency.  
+  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
+
+### 6. Even More Mathematical Functions
+
+- Toolbar provides even more mathematical functions:
+
+  - `Trim`: Remove any white-spaces from selected cells.
+  - `Upper`: Converts the selected cell into Uppercase.
+  - `Lower`: Converts selected cell value to Lowercase.
+  - `Duplicate`: Remove duplicates from selected range of cells.
+
+  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
 
 ## Tech Stack
 
