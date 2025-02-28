@@ -33,14 +33,14 @@ This project is a web-based spreadsheet application that mimics the core functio
   - For min type: `=min`
   - For average type: `=average`
 
-  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
+  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/functions.gif)
 
 ### 5. Mathematical Functions Retain Their Value
 
 - Cells update their value when cells which were initially used to create them change their values.
 - This is implemented using ContextAPI to keep track of cell type.
 - `useState` is used to maintain cells dependency.  
-  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/functions.gif)
+  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/retain.gif)
 
 ### 6. Even More Mathematical Functions
 
