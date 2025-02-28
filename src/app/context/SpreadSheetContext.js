@@ -60,7 +60,8 @@ export const SpreadsheetProvider = ({ children }) => {
         setDragState,
         dragState,
         setActiveCell,
-        isCellActive
+        isCellActive,
+        activeCell
     };
 
     return (

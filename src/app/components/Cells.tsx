@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSpreadsheet } from "../context/SpreadSheetContext";
 import styles from "../styles/cells.module.css";
 
-const Cell = ({ id }) => {
+const Cell = ({ id, width, height }) => {
   const intialBorder = "1px solid #F5F5F5";
   const dragBorder = "3px dashed #5C98E6";
   const activeBorder = "1px solid blue";
@@ -34,11 +34,7 @@ const Cell = ({ id }) => {
   }, [isCellSelected(id)]);
 
   useEffect(() => {
-    if (isCellActive(id)) {
-      setBorderStyle(activeBorder);
-    } else {
-      setBorderStyle(intialBorder);
-    }
+    setBorderStyle(isCellActive(id) ? activeBorder : intialBorder);
   }, [isCellActive(id)]);
 
   const isOnBoundary = (e) => {
@@ -65,10 +61,14 @@ const Cell = ({ id }) => {
       ref={cellRef}
       className={styles.cell}
       style={{
-        height: "40px",
+        width,
+        height,
         border: borderStyle,
         backgroundColor: background,
-        padding: "4px", // Apply margin dynamically
+        padding: "4px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
       onMouseMove={(e) => {
         if (showSelectionState() && !dragState) {
@@ -117,7 +117,15 @@ const Cell = ({ id }) => {
           }}
         />
       ) : (
-        <div style={{ userSelect: "none" }}>{value}</div>
+        <div
+          style={{
+            userSelect: "none",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {value}
+        </div>
       )}
     </div>
   );

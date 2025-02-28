@@ -9,10 +9,12 @@ import {
   useCount,
   useAverage,
 } from "../utils/functions";
+import { useSpreadsheet } from "../context/SpreadSheetContext";
 
 const FunctionsBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const { activeCell, updateCellValue } = useSpreadsheet();
 
   // Call hooks inside the component
   const sum = useSum();
@@ -25,22 +27,22 @@ const FunctionsBar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (operation) => {
+  const handleClose = (operation: string) => {
     switch (operation) {
       case "sum":
-        console.log("SUM result:", sum);
+        updateCellValue(activeCell, sum);
         break;
       case "max":
-        console.log("MAX result:", max);
+        updateCellValue(activeCell, max);
         break;
       case "min":
-        console.log("MIN result:", min);
+        updateCellValue(activeCell, min);
         break;
       case "count":
-        console.log("COUNT result:", count);
+        updateCellValue(activeCell, count);
         break;
       case "average":
-        console.log("AVERAGE result:", average);
+        updateCellValue(activeCell, average);
         break;
       default:
         console.log("Invalid operation");
