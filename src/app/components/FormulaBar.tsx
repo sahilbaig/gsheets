@@ -21,11 +21,7 @@ const FormulaBar = () => {
   const handleChange = (event) => {
     const value = event.target.value;
     setInputValue(value);
-
-    if (activeCell) {
-      updateCellValue(activeCell, value);
-      updateCellType(activeCell, value.startsWith("=") ? "formula" : "text");
-    }
+    updateCellValue(activeCell, value);
   };
 
   const handleKeyDown = (event) => {
@@ -35,19 +31,27 @@ const FormulaBar = () => {
       switch (value) {
         case "=SUM":
           updateCellValue(activeCell, sum);
+          updateCellType(activeCell, "sum");
           break;
         case "=MAX":
           updateCellValue(activeCell, max);
+          updateCellType(activeCell, "max");
 
           break;
         case "=MIN":
           updateCellValue(activeCell, min);
+          updateCellType(activeCell, "min");
+
           break;
         case "=COUNT":
           updateCellValue(activeCell, count);
+          updateCellType(activeCell, "count");
+
           break;
         case "=AVERAGE":
           updateCellValue(activeCell, average);
+          updateCellType(activeCell, "avg");
+
           break;
         default:
           updateCellValue(activeCell, event.target.value);

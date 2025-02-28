@@ -19,11 +19,14 @@ const Cell = ({ id, width, height }) => {
     setActiveCell,
     isCellActive,
     cellType,
+    selectedCells,
   } = useSpreadsheet();
 
   const [isEditing, setIsEditing] = useState(false);
   const [background, setBackground] = useState("white");
   const [borderStyle, setBorderStyle] = useState(intialBorder);
+  const [currentCellType, setCurrentCellType] = useState(cellType[id] || "");
+  const [dependency, setDependency] = useState([]);
   const cellRef = useRef(null);
 
   const value = cellValues[id] || "";
@@ -41,10 +44,57 @@ const Cell = ({ id, width, height }) => {
   }, [isCellActive(id)]);
 
   useEffect(() => {
-    if (cellType[id]) {
-      console.log(`Cell ${id} type changed to: ${cellType[id]}`);
+    setCurrentCellType(cellType[id] || "");
+    if (currentCellType != "text") {
+      console.log("goes her?");
+      setDependency(selectedCells);
+    } else {
+      setDependency({});
     }
-  }, [cellType[id]]); //cell type
+    console.log(`Cell ${id} type changed to: ${cellType[id]}`);
+  }, [cellType[id]]);
+
+  useEffect(() => {
+    if (!dependency || dependency.length === 0) return;
+
+    const values = dependency.map(
+      (cellId) => parseFloat(cellValues[cellId]) || 0
+    );
+    console.log(values);
+
+    switch (cellType[id]) {
+      case "sum":
+        console.log(id, values);
+        updateCellValue(
+          id,
+          values.reduce((acc, val) => acc + val, 0)
+        );
+        break;
+      case "max":
+        updateCellValue(id, Math.max(...values));
+        break;
+      case "min":
+        updateCellValue(id, Math.min(...values));
+        break;
+      case "count":
+        updateCellValue(id, values.length);
+        break;
+      case "avg":
+        updateCellValue(
+          id,
+          values.length > 0
+            ? values.reduce((acc, val) => acc + val, 0) / values.length
+            : 0
+        );
+        break;
+      default:
+        break;
+    }
+  }, [
+    cellType[id],
+    ...dependency.map((cellId) => cellValues[cellId]),
+    currentCellType,
+  ]);
   const isOnBoundary = (e) => {
     if (!cellRef.current) return false;
 
@@ -62,6 +112,7 @@ const Cell = ({ id, width, height }) => {
   const handleClick = () => {
     setBorderStyle(activeBorder);
     setActiveCell(id);
+    console.log(dependency);
   };
 
   return (
