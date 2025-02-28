@@ -12,14 +12,14 @@ This project is a web-based spreadsheet application that mimics the core functio
 ### 2. Drag Cells
 
 - Drag cells around.
-- This is implemented using ContextAPI to track `startCell`.  
-  ![Drag Cells](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
+- This is implemented using ContextAPI to track `startCell` location and `endCell` location.
+  ![Drag Cells](https://github.com/sahilbaig/allmygifs/blob/main/drag.gif)
 
 ### 3. Select a Group of Cells
 
 - Drag mouse around to select a group of cells.
 - This is implemented using ContextAPI to track selected cells and MouseEvents to add or remove cells from the list of selected cells.  
-  ![Select Cells](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
+  ![Select Cells](https://github.com/sahilbaig/allmygifs/blob/main/select.gif)
 
 ### 4. Get SUM, MAX, MIN, AVERAGE, COUNT
 
@@ -40,7 +40,7 @@ This project is a web-based spreadsheet application that mimics the core functio
 - Cells update their value when cells which were initially used to create them change their values.
 - This is implemented using ContextAPI to keep track of cell type.
 - `useState` is used to maintain cells dependency.  
-  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
+  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/functions.gif)
 
 ### 6. Even More Mathematical Functions
 
@@ -51,7 +51,7 @@ This project is a web-based spreadsheet application that mimics the core functio
   - `Lower`: Converts selected cell value to Lowercase.
   - `Duplicate`: Remove duplicates from selected range of cells.
 
-  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
+  ![Functions](https://github.com/sahilbaig/allmygifs/blob/main/dataQuality.gif)
 
 ## Tech Stack
 
