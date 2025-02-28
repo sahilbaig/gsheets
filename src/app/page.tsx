@@ -5,6 +5,7 @@ import TopBar from "./components/Topbar.tsx";
 import PrimaryToolBar from "./components/PrimaryToolBar.tsx";
 import SpreadSheet from "./components/Spreadsheet.tsx";
 import ShowValuesButton from "./components/showValues";
+import DataToolBar from "./components/DataToolBar";
 
 export default function Home() {
   return (
@@ -17,7 +18,10 @@ export default function Home() {
           <PrimaryToolBar />
         </Grid>
         <Grid item xs={12}>
-          <SpreadSheet rows={10} columns={10} />
+          <DataToolBar />
+        </Grid>
+        <Grid item xs={12}>
+          <SpreadSheet />
         </Grid>
       </Grid>
       <ShowValuesButton />
