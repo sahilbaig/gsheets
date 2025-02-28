@@ -7,7 +7,7 @@ This project is a web-based spreadsheet application that mimics the core functio
 ### 1. Edit Cells
 
 -Double click on any cell to start editing.
-![Alt text](https://gifyu.com/image/bbS22)
+![Double Click to Edit](https://github.com/sahilbaig/allmygifs/blob/main/cellEdit.gif)
 
 ## Tech Stack
 
