@@ -46,12 +46,10 @@ const Cell = ({ id, width, height }) => {
   useEffect(() => {
     setCurrentCellType(cellType[id] || "");
     if (currentCellType != "text") {
-      console.log("goes her?");
       setDependency(selectedCells);
     } else {
       setDependency({});
     }
-    console.log(`Cell ${id} type changed to: ${cellType[id]}`);
   }, [cellType[id]]);
 
   useEffect(() => {
@@ -60,11 +58,9 @@ const Cell = ({ id, width, height }) => {
     const values = dependency.map(
       (cellId) => parseFloat(cellValues[cellId]) || 0
     );
-    console.log(values);
 
     switch (cellType[id]) {
       case "sum":
-        console.log(id, values);
         updateCellValue(
           id,
           values.reduce((acc, val) => acc + val, 0)
@@ -112,7 +108,6 @@ const Cell = ({ id, width, height }) => {
   const handleClick = () => {
     setBorderStyle(activeBorder);
     setActiveCell(id);
-    console.log(dependency);
   };
 
   return (

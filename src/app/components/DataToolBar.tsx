@@ -5,11 +5,19 @@ import FormulaBar from "./FormulaBar";
 
 const DataToolBar = () => {
   const { activeCell } = useSpreadsheet();
+
   return (
-    <Grid2 container spacing={2} className={styles.dataToolBar}>
-      <Grid2>{activeCell} </Grid2>
+    <Grid2
+      container
+      spacing={2}
+      className={styles.dataToolBar}
+      alignItems="center"
+    >
+      <Grid2 sx={{ display: "flex", alignItems: "center", marginLeft: "10px" }}>
+        {activeCell}
+      </Grid2>
       <Grid2>
-        <FormulaBar></FormulaBar>
+        <FormulaBar />
       </Grid2>
     </Grid2>
   );

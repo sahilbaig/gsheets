@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TextField } from "@mui/material";
-import FunctionsIcon from "@mui/icons-material/Functions";
+import CalculateIcon from "@mui/icons-material/Calculate"; // More mathematical icon
 import { useSpreadsheet } from "../context/SpreadSheetContext";
 import {
   useSum,
@@ -9,6 +9,7 @@ import {
   useCount,
   useAverage,
 } from "../utils/functions";
+
 const FormulaBar = () => {
   const { activeCell, updateCellType, updateCellValue } = useSpreadsheet();
   const sum = useSum();
@@ -18,6 +19,7 @@ const FormulaBar = () => {
   const average = useAverage();
 
   const [inputValue, setInputValue] = useState("");
+
   const handleChange = (event) => {
     const value = event.target.value;
     setInputValue(value);
@@ -36,22 +38,18 @@ const FormulaBar = () => {
         case "=MAX":
           updateCellValue(activeCell, max);
           updateCellType(activeCell, "max");
-
           break;
         case "=MIN":
           updateCellValue(activeCell, min);
           updateCellType(activeCell, "min");
-
           break;
         case "=COUNT":
           updateCellValue(activeCell, count);
           updateCellType(activeCell, "count");
-
           break;
         case "=AVERAGE":
           updateCellValue(activeCell, average);
           updateCellType(activeCell, "avg");
-
           break;
         default:
           updateCellValue(activeCell, event.target.value);
@@ -62,7 +60,7 @@ const FormulaBar = () => {
   return (
     <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
       <div style={{ padding: "4px 8px", color: "#666" }}>
-        <FunctionsIcon fontSize="small" />
+        <CalculateIcon fontSize="small" /> {/* Updated Icon */}
       </div>
 
       <TextField

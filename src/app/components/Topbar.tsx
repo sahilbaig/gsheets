@@ -11,24 +11,9 @@ const TopBar = () => {
       </Grid2>
       <Grid2>
         <Stack spacing={1}>
-          <p>Untitle spreadsheet</p>
+          <p>Untitled spreadsheet</p>
           <MenuBar></MenuBar>
         </Stack>
-      </Grid2>
-      <Grid2>
-        <ClickableIcon></ClickableIcon>
-      </Grid2>
-      <Grid2>
-        <ClickableIcon></ClickableIcon>
-      </Grid2>
-      <Grid2>
-        <ClickableIcon></ClickableIcon>
-      </Grid2>
-      <Grid2>
-        <ClickableIcon></ClickableIcon>
-      </Grid2>
-      <Grid2>
-        <ClickableIcon></ClickableIcon>
       </Grid2>
     </Grid2>
   );

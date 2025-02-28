@@ -1,7 +1,10 @@
 .primaryToolBar {
   width: 100%;
   background-color: #f0f4f9;
-  padding: 10px;
   color: black;
-  border-radius: 10;
+  border-radius: 20px;
+  display: flex;
+  align-items: center; /* Ensures vertical centering */
+  padding: 2px 4px; /* Reduced padding */
+  min-height: 0; /* Ensures it doesn't take extra space */
 }
