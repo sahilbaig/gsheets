@@ -10,6 +10,7 @@ export const SpreadsheetProvider = ({ children }) => {
     const [cellValues, setCellValues] = useState({});
     const [isSelectionStarted, setIsSelectionStarted] = useState(false);
     const [dragState, setDragState] = useState(null)
+    const [activeCell, setActiveCell] = useState(null);
 
     // State to manage selected cells
     const [selectedCells, setSelectedCells] = useState([]);
@@ -38,24 +39,12 @@ export const SpreadsheetProvider = ({ children }) => {
     const clearSelectedCells = () => {
         setSelectedCells([]);
     };
-    const getMinCellValue = () => {
-        if (selectedCells.length) {
-            let minValue = Infinity;
 
-            for (const cell of selectedCells) {
-                const value = Number(cellValues[cell]);
-
-                if (!isNaN(value)) {
-                    console.log(`Cell ${cell}:`, value); // Print the value
-                    minValue = Math.min(minValue, value);
-                }
-            }
-
-            return minValue === Infinity ? null : minValue;
-        }
-        return null;
-
-    };
+    const isCellActive = (id) => {
+        if (activeCell == id)
+            return true
+        return false;
+    }
 
     // Value to be provided by the context
     const value = {
@@ -70,7 +59,8 @@ export const SpreadsheetProvider = ({ children }) => {
         isCellSelected,
         setDragState,
         dragState,
-        getMinCellValue
+        setActiveCell,
+        isCellActive
     };
 
     return (
