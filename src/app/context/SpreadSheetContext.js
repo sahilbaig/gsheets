@@ -10,7 +10,7 @@ export const SpreadsheetProvider = ({ children }) => {
     const [cellValues, setCellValues] = useState({});
     const [isSelectionStarted, setIsSelectionStarted] = useState(false);
     const [dragState, setDragState] = useState(null)
-    const [activeCell, setActiveCell] = useState(null);
+    const [activeCell, setActiveCell] = useState("A1");
 
     // State to manage selected cells
     const [selectedCells, setSelectedCells] = useState([]);
