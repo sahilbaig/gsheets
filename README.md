@@ -2,6 +2,8 @@
 
 This project is a web-based spreadsheet application that mimics the core functionalities of Google Sheets, built using React, Next.js, and Material UI.
 
+## 🔗 Live Demo : https://gsheets-nu.vercel.app/
+
 ## Features
 
 ### 1. Edit Cells
