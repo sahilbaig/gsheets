@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import React, { useState } from "react";
 import { Menu, MenuItem, IconButton } from "@mui/material";
@@ -28,7 +27,7 @@ const FunctionsBar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (operation: string) => {
+  const handleClose = (operation) => {
     switch (operation) {
       case "sum":
         updateCellValue(activeCell, sum);

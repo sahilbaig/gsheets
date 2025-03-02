@@ -57,7 +57,7 @@ const PrimaryToolBar = () => {
 
   function handleRemoveDuplicates() {
     const uniqueValues = new Set();
-    selectedCells.forEach((cellId: number) => {
+    selectedCells.forEach((cellId) => {
       const value = cellValues[cellId];
       if (uniqueValues.has(value)) {
         updateCellValue(cellId, "");

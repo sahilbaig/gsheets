@@ -1,7 +1,7 @@
 "use client";
 import { SpreadsheetProvider } from "./context/SpreadSheetContext";
 import Grid from "@mui/material/Grid";
-import TopBar from "./components/Topbar.tsx";
+import TopBar from "./components/Topbar.js";
 import PrimaryToolBar from "./components/PrimaryToolBar.tsx";
 import SpreadSheet from "./components/Spreadsheet.tsx";
 import DataToolBar from "./components/DataToolBar";
