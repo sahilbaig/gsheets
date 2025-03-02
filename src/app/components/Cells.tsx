@@ -1,10 +1,16 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, MouseEvent } from "react";
 import { useSpreadsheet } from "../context/SpreadSheetContext";
 import styles from "../styles/cells.module.css";
 
-const Cell = ({ id, width, height }) => {
-  const intialBorder = "1px solid #F5F5F5";
+type CellProps = {
+  id: string;
+  width: number | string;
+  height: number | string;
+};
+
+const Cell: React.FC<CellProps> = ({ id, width, height }) => {
+  const initialBorder = "1px solid #F5F5F5";
   const dragBorder = "3px dashed #5C98E6";
   const activeBorder = "1px solid blue";
 
@@ -24,33 +30,33 @@ const Cell = ({ id, width, height }) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [background, setBackground] = useState("white");
-  const [borderStyle, setBorderStyle] = useState(intialBorder);
+  const [borderStyle, setBorderStyle] = useState(initialBorder);
   const [currentCellType, setCurrentCellType] = useState(cellType[id] || "");
-  const [dependency, setDependency] = useState([]);
-  const cellRef = useRef(null);
+  const [dependency, setDependency] = useState<string[]>([]);
+  const cellRef = useRef<HTMLDivElement>(null);
 
   const value = cellValues[id] || "";
   const handleBlur = () => setIsEditing(false);
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateCellValue(id, e.target.value);
   };
 
   useEffect(() => {
     setBackground(isCellSelected(id) ? "#E6EFFD" : "white");
-  }, [isCellSelected(id)]);
+  }, [id, isCellSelected]);
 
   useEffect(() => {
-    setBorderStyle(isCellActive(id) ? activeBorder : intialBorder);
-  }, [isCellActive(id)]);
+    setBorderStyle(isCellActive(id) ? activeBorder : initialBorder);
+  }, [id, isCellActive]);
 
   useEffect(() => {
     setCurrentCellType(cellType[id] || "");
-    if (currentCellType != "text") {
+    if (currentCellType !== "text") {
       setDependency(selectedCells);
     } else {
-      setDependency({});
+      setDependency([]);
     }
-  }, [cellType[id]]);
+  }, [cellType, id, selectedCells, currentCellType]);
 
   useEffect(() => {
     if (!dependency || dependency.length === 0) return;
@@ -86,17 +92,12 @@ const Cell = ({ id, width, height }) => {
       default:
         break;
     }
-  }, [
-    cellType[id],
-    ...dependency.map((cellId) => cellValues[cellId]),
-    currentCellType,
-  ]);
-  const isOnBoundary = (e) => {
-    if (!cellRef.current) return false;
+  }, [id, dependency, cellValues, cellType, updateCellValue]);
 
+  const isOnBoundary = (e: MouseEvent<HTMLDivElement>) => {
+    if (!cellRef.current) return false;
     const rect = cellRef.current.getBoundingClientRect();
     const margin = 5;
-
     return (
       e.clientX <= rect.left + margin ||
       e.clientX >= rect.right - margin ||
@@ -151,7 +152,7 @@ const Cell = ({ id, width, height }) => {
       }}
       onMouseLeave={() => {
         if (!isCellActive(id)) {
-          setBorderStyle(intialBorder);
+          setBorderStyle(initialBorder);
         }
       }}
       onClick={handleClick}
