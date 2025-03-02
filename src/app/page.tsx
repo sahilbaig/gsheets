@@ -2,8 +2,8 @@
 import { SpreadsheetProvider } from "./context/SpreadSheetContext";
 import Grid from "@mui/material/Grid";
 import TopBar from "./components/Topbar.js";
-import PrimaryToolBar from "./components/PrimaryToolBar.tsx";
-import SpreadSheet from "./components/Spreadsheet.tsx";
+import PrimaryToolBar from "./components/PrimaryToolBar.js";
+import SpreadSheet from "./components/Spreadsheet.js";
 import DataToolBar from "./components/DataToolBar";
 
 export default function Home() {
