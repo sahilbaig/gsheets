@@ -125,7 +125,7 @@ const Cell: React.FC<CellProps> = ({ id, width, height }) => {
         alignItems: "center",
         justifyContent: "center",
       }}
-      onMouseMove={(e) => {
+      onMouseMove={() => {
         if (showSelectionState() && !dragState) {
           setBackground("#E6EFFD");
           addCellSelection(id);
