@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, KeyboardEvent, ChangeEvent } from "react";
 import { TextField } from "@mui/material";
-import CalculateIcon from "@mui/icons-material/Calculate"; // More mathematical icon
+import CalculateIcon from "@mui/icons-material/Calculate";
 import { useSpreadsheet } from "../context/SpreadSheetContext";
 import {
   useSum,
@@ -18,18 +18,20 @@ const FormulaBar = () => {
   const count = useCount();
   const average = useAverage();
 
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string>("");
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setInputValue(value);
-    updateCellValue(activeCell, value);
+    if (activeCell) updateCellValue(activeCell, value);
   };
 
-  const handleKeyDown = (event) => {
-    const value = event.target.value.trim().toUpperCase();
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (!activeCell) return;
 
-    if (event.key === "Enter" && activeCell) {
+    const value = inputValue.trim().toUpperCase();
+
+    if (event.key === "Enter") {
       switch (value) {
         case "=SUM":
           updateCellValue(activeCell, sum);
@@ -52,7 +54,7 @@ const FormulaBar = () => {
           updateCellType(activeCell, "avg");
           break;
         default:
-          updateCellValue(activeCell, event.target.value);
+          updateCellValue(activeCell, inputValue);
       }
     }
   };
@@ -60,7 +62,7 @@ const FormulaBar = () => {
   return (
     <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
       <div style={{ padding: "4px 8px", color: "#666" }}>
-        <CalculateIcon fontSize="small" /> {/* Updated Icon */}
+        <CalculateIcon fontSize="small" />
       </div>
 
       <TextField

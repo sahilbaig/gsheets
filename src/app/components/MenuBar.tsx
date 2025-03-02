@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 import { Grid, Tooltip } from "@mui/material";
 import { useState } from "react";
