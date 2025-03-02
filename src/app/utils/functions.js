@@ -3,7 +3,7 @@ import { useSpreadsheet } from "../context/SpreadSheetContext";
 export const useSum = () => {
   const { cellValues, selectedCells } = useSpreadsheet();
   return selectedCells
-    .map((cell: number) => Number(cellValues[cell]))
+    .map((cell) => Number(cellValues[cell]))
     .filter((val) => !isNaN(val))
     .reduce((acc, val) => acc + val, 0);
 };
@@ -27,7 +27,7 @@ export const useMin = () => {
 export const useMax = () => {
   const { cellValues, selectedCells } = useSpreadsheet();
   const values = selectedCells
-    .map((cell: number) => Number(cellValues[cell]))
+    .map((cell) => Number(cellValues[cell]))
     .filter((val) => !isNaN(val));
 
   return values.length ? Math.max(...values) : null;

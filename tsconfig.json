@@ -31,7 +31,8 @@
     "src/app/components/Topbar.js",
     "src/app/components/Spreadsheet.js",
     "src/app/components/MenuBar.js",
-    "src/app/components/FunctionsBar.js"
+    "src/app/components/FunctionsBar.js",
+    "src/app/utils/functions.js"
   ],
   "exclude": ["node_modules"]
 }
